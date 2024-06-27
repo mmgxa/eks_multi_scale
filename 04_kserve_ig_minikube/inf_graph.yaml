@@ -1,0 +1,33 @@
+apiVersion: "serving.kserve.io/v1alpha1"
+kind: "InferenceGraph"
+metadata:
+  name: "classifier"
+spec:
+  nodes:
+    root:
+      routerType: Sequence
+      steps:
+        - nodeName: human_ensemble
+          name: human_ensemble
+        - nodeName: dog_ensemble
+          name: dog_ensemble
+          condition: '[@this].#(cifar10_classify.predictions.0.class=="LABEL_5")'
+
+    dog_ensemble:
+      routerType: Ensemble
+      steps:
+        - serviceName: dog-classifier
+          name: dog_classifier
+        - serviceName: cifar10
+          name: cifar10_classify
+    human_ensemble:
+      routerType: Ensemble
+      steps:
+        - serviceName: gender-classifier
+          name: gender_classifier
+        - serviceName: emotion-classifier
+          name: emotion_classifier
+        - serviceName: age-classifier
+          name: age_classifier
+        - serviceName: cifar10
+          name: cifar10_classify

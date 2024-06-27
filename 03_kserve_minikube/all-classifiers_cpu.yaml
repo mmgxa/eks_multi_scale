@@ -1,0 +1,78 @@
+apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: "cifar10"
+spec:
+  predictor:
+    serviceAccountName: s3-read-only
+    model:
+      modelFormat:
+        name: pytorch
+      storageUri: s3://emlo-s22/kserve-mar/cifar10/
+      # resources:
+      #   limits:
+      #     cpu: 2000m
+
+---
+apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: "dog-classifier"
+spec:
+  predictor:
+    serviceAccountName: s3-read-only
+    model:
+      modelFormat:
+        name: pytorch
+      storageUri: s3://emlo-s22/kserve-mar/dog-classifier/
+      # resources:
+      #   limits:
+      #     cpu: 2000m
+
+---
+apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: "gender-classifier"
+spec:
+  predictor:
+    serviceAccountName: s3-read-only
+    model:
+      modelFormat:
+        name: pytorch
+      storageUri: s3://emlo-s22/kserve-mar/gender-classifier/
+      # resources:
+      #   limits:
+      #     cpu: 2000m
+
+---
+apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: "age-classifier"
+spec:
+  predictor:
+    serviceAccountName: s3-read-only
+    model:
+      modelFormat:
+        name: pytorch
+      storageUri: s3://emlo-s22/kserve-mar/age-classifier/
+      # resources:
+      #   limits:
+      #     cpu: 2000m
+
+---
+apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: "emotion-classifier"
+spec:
+  predictor:
+    serviceAccountName: s3-read-only
+    model:
+      modelFormat:
+        name: pytorch
+      storageUri: s3://emlo-s22/kserve-mar/emotion-classifier/
+      # resources:
+      #   limits:
+      #     cpu: 2000m

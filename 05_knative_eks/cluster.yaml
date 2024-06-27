@@ -1,0 +1,61 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: emlo-s22-cluster
+  region: us-west-2
+  version: "1.28"
+
+iam:
+  withOIDC: true
+
+vpc:
+  id: vpc-0b4241f730b340531
+  subnets:
+    public:
+      us-west-2a:
+        id: "subnet-0a11af0a1aa1b1541"
+      us-west-2b:
+        id: "subnet-01b6885c030a95bf5"
+      us-west-2c:
+        id: "subnet-0e7c6e3052e92ccd3"
+
+managedNodeGroups:
+  - name: ng-cpu-spot-1
+    instanceType: t3a.2xlarge
+    volumeSize: 60
+    volumeType: gp3
+    desiredCapacity: 1
+    ssh:
+      allow: true
+      publicKeyPath: /home/ubuntu/.ssh/id_rsa.pub
+    spot: true
+    labels:
+      role: spot
+    iam:
+      withAddonPolicies:
+        awsLoadBalancerController: true
+        certManager: true
+        externalDNS: true
+        ebs: true
+        efs: true
+        cloudWatch: true
+  - name: ng-gpu-spot-1
+    instanceType: g4dn.xlarge
+    volumeSize: 60
+    volumeType: gp3
+    desiredCapacity: 1
+    ssh:
+      allow: true
+      publicKeyPath: /home/ubuntu/.ssh/id_rsa.pub
+    spot: true
+    labels:
+      role: spot
+      k8s.amazonaws.com/accelerator: g4dn
+    propagateASGTags: true
+    iam:
+      withAddonPolicies:
+        autoScaler: true
+        ebs: true
+        efs: true
+        awsLoadBalancerController: true

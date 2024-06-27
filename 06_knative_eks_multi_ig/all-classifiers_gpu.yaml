@@ -1,0 +1,128 @@
+apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: "cifar10"
+spec:
+  predictor:
+    scaleTarget: 1
+    scaleMetric: concurrency
+    minReplicas: 1
+    maxReplicas: 5
+    serviceAccountName: s3-read-only
+    model:
+      modelFormat:
+        name: pytorch
+      storageUri: s3://emlo-s22/kserve-mar/cifar10/
+      resources:
+        requests:
+          cpu: 500m
+          memory: 500Mi
+          nvidia.com/gpu: 1
+        limits:
+          nvidia.com/gpu: 1
+          cpu: 500m
+          memory: 1Gi
+
+---
+apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: "dog-classifier"
+spec:
+  predictor:
+    scaleTarget: 1
+    scaleMetric: concurrency
+    minReplicas: 1
+    maxReplicas: 5
+    serviceAccountName: s3-read-only
+    model:
+      modelFormat:
+        name: pytorch
+      storageUri: s3://emlo-s22/kserve-mar/dog-classifier/
+      resources:
+        requests:
+          cpu: 500m
+          memory: 500Mi
+          nvidia.com/gpu: 1
+        limits:
+          nvidia.com/gpu: 1
+          cpu: 500m
+          memory: 1Gi
+
+---
+apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: "gender-classifier"
+spec:
+  predictor:
+    scaleTarget: 1
+    scaleMetric: concurrency
+    minReplicas: 1
+    maxReplicas: 5
+    serviceAccountName: s3-read-only
+    model:
+      modelFormat:
+        name: pytorch
+      storageUri: s3://emlo-s22/kserve-mar/gender-classifier/
+      resources:
+        requests:
+          cpu: 500m
+          memory: 500Mi
+          nvidia.com/gpu: 1
+        limits:
+          nvidia.com/gpu: 1
+          cpu: 500m
+          memory: 1Gi
+
+---
+apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: "age-classifier"
+spec:
+  predictor:
+    scaleTarget: 1
+    scaleMetric: concurrency
+    minReplicas: 1
+    maxReplicas: 5
+    serviceAccountName: s3-read-only
+    model:
+      modelFormat:
+        name: pytorch
+      storageUri: s3://emlo-s22/kserve-mar/age-classifier/
+      resources:
+        requests:
+          cpu: 500m
+          memory: 500Mi
+          nvidia.com/gpu: 1
+        limits:
+          nvidia.com/gpu: 1
+          cpu: 500m
+          memory: 1Gi
+
+---
+apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: "emotion-classifier"
+spec:
+  predictor:
+    scaleTarget: 1
+    scaleMetric: concurrency
+    minReplicas: 1
+    maxReplicas: 5
+    serviceAccountName: s3-read-only
+    model:
+      modelFormat:
+        name: pytorch
+      storageUri: s3://emlo-s22/kserve-mar/emotion-classifier/
+      resources:
+        requests:
+          cpu: 500m
+          memory: 500Mi
+          nvidia.com/gpu: 1
+        limits:
+          nvidia.com/gpu: 1
+          cpu: 500m
+          memory: 1Gi

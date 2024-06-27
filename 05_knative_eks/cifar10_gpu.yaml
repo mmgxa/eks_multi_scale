@@ -1,0 +1,18 @@
+apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: "cifar10"
+spec:
+  predictor:
+    scaleTarget: 1
+    scaleMetric: concurrency
+    minReplicas: 0
+    maxReplicas: 5
+    serviceAccountName: s3-read-only
+    model:
+      modelFormat:
+        name: pytorch
+      storageUri: s3://emlo-s22/kserve-mar-gpu/cifar10/
+      resources:
+        limits:
+          nvidia.com/gpu: 1
